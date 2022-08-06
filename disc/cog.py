@@ -24,10 +24,12 @@ class Slash(commands.Cog):
         random_color = colors.random_color()
         final_color = discord.Colour(random_color)
 
-        description = f"**{data.company}**\n*{data.title}*\n\n"
-        description += f"Location: {data.location}.\n\n"
-        description += f"This job was posted __{data.posted_time_ago}__.\n\n"
-        description += f"{data.summary}\n\nApply Now: {data.url}\n"
+        description = (
+            f"**{data.company}**\n*{data.title}*\n\n"
+            f"Location: {data.location}.\n\n"
+            f"This job was posted __{data.posted_time_ago}__.\n\n"
+            f"{data.summary}\n\nApply Now: {data.url}\n"
+        )
 
         embed_content = discord.Embed(
             title="Check out this job on LinkedIn!",
