@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord_slash import cog_ext
 from discord_slash import SlashContext
+
 from job_boards_scrapers import LinkedIn
 from utils import Colors
 
