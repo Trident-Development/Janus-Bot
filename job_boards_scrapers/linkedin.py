@@ -3,7 +3,7 @@ from http.client import InvalidURL
 from typing import Optional
 from typing import Union
 
-import requests
+import validators
 
 from job_boards_scrapers.base import JobBoard
 from job_boards_scrapers.base import JobBoardType
@@ -35,7 +35,7 @@ class LinkedIn(JobBoard):
             job = self._url_from_job_id(job)
             is_direct_view = True
 
-        if requests.head(job).status_code >= 400:
+        if validators.url(job):
             raise InvalidURL()
 
         is_direct_view = job.startswith(self._VIEW_LINK_PREFIX)
