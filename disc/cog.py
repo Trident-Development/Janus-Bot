@@ -58,7 +58,7 @@ class Slash(commands.Cog):
             description=description,
             color=final_color,
         )
-        embed_content.set_image(url=f"{data.company_pic_url}")
+        embed_content.set_thumbnail(url=f"{data.company_pic_url}")
 
         await ctx.send(embed=embed_content)
 
