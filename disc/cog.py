@@ -1,3 +1,6 @@
+import logging
+from http.client import InvalidURL
+
 import discord
 from discord.ext import commands
 from discord_slash import cog_ext
@@ -5,6 +8,10 @@ from discord_slash import SlashContext
 
 from job_boards_scrapers import LinkedIn
 from utils import Colors
+
+
+_LOGGER = logging.getLogger(__name__)
+
 
 class Descriptions:
     POST_JOB = "Parse a job post's information beautifully in the channel"
@@ -18,7 +25,19 @@ class Slash(commands.Cog):
     @cog_ext.cog_slash(name="post-job", description=Descriptions.POST_JOB)
     async def _post_job(self, ctx: SlashContext, job):
         linkedin = LinkedIn()
-        data = linkedin.get_job_info(job)
+        try:
+            data = linkedin.get_job_info(job)
+        except InvalidURL:
+            await ctx.send(
+                (
+                    "Hi there! Seems like your URL is invalid. "
+                    "Make sure that the URL is linking to a job post. "
+                    "And keep in mind that currently Janus only supports LinkedIn job posts."
+                ),
+                hidden=True,
+            )
+            _LOGGER.info("Sent private message to user notifying given url is invalid.")
+            return
 
         colors = Colors()
         random_color = colors.random_color()
@@ -35,10 +54,10 @@ class Slash(commands.Cog):
             title="Check out this job on LinkedIn!",
             type="rich",
             description=description,
-            color=final_color
+            color=final_color,
         )
         embed_content.set_image(url=f"{data.company_pic_url}")
-        
+
         await ctx.send(embed=embed_content)
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
