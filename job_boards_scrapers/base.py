@@ -48,7 +48,6 @@ class JobBoard:
     _location_key: str
     _company_pic_key: str
     _img_src_key: str
-    _link_to_job_in_list: str
 
     def __init_subclass__(cls) -> None:
         cls._html2text = html2text.HTML2Text()
@@ -109,22 +108,6 @@ class JobBoard:
             posted_time_ago=posted_time_ago,
             url=url,
         )
-
-    def _extract_from_jobs_list(self, url: str) -> Optional[JobInfo]:
-        """
-        Extract the job information when the job is viewed in list mode
-
-        Args:
-            url (str): The URL to the job post
-
-        Returns:
-            Optional[JobInfo]: The basic information of the job
-        """
-        response = requests.get(url)
-        html = response.content
-        soup = bs(html, "lxml")
-        direct_view_url = soup.find_all(class_=self._link_to_job)[0]
-        return self._extract_from_direct_view(direct_view_url)
 
     @property
     def name(self) -> str:
