@@ -1,7 +1,5 @@
 import os
 
-from config.local_settings import DISCORD_TOKEN
-
 
 class OSEnvKeys:
     """
