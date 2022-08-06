@@ -9,3 +9,6 @@ A simple job posting Discord bot that leverages a custom LinkedIn scraping API t
 
 ## Demo ✨
 - **in progress**
+
+## Development Setup
+Please check (the setup doc)[./docs/setup.md] for setup instructions.
