@@ -1,6 +1,6 @@
 # Development Setup Instruction
 
-A complete guild to setup your development environment :D
+A complete guide to setup your development environment :D
 
 ---
 
@@ -17,9 +17,16 @@ Make sure you also already installed `pip` and `venv` for your Python
 Start by creating your isolated Python environment with `venv`:
 
 ```bash
-python3 -m venv .venv
+$ python3 -m venv .venv
 ```
 In this case, `.venv` is the name of the directory containing your Python executable and other files. You can name it anything you want, but `.venv` is the most common name.
+
+Next, activate your virutal environment:
+
+```bash
+$ source .venv/bin/activate
+```
+You can verify your virutal environment is properly activated by running `python -V` which will either have your regular path (incorrectly activated) or your virutal environment path (correctly activated).
 
 ---
 
