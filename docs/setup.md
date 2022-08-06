@@ -41,6 +41,12 @@ pip install -r requirements.txt
 ### Pre-commit
 
 Inorder to make sure the codebase is clean and the style is consistent between many developers, we use a few lint tools to detect and auto-fix (if possible). These can be found in `.pre-commit-config.yaml`.
+
+To install git hooks in your `.git` directory, run:
+```
+pre-commit install
+```
+
 These lint tools will be run when you commit your code and you can only successfully commit if . You can also run it without commiting: `pre-commit run --all-files`
 
 ---
