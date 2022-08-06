@@ -16,7 +16,7 @@ class LinkedIn(JobBoard):
     """
 
     _VIEW_LINK_PREFIX = "https://www.linkedin.com/jobs/view"
-    _RECOMMENDED_LINK_REGEX = re.compile(r".*\?currentJobId=[0-9]*$")
+    _RECOMMENDED_LINK_REGEX = re.compile(r".*\?currentJobId=[0-9]*")
 
     def __init__(self) -> None:
         self._job_board_name = JobBoardType.LINKEDIN
@@ -48,7 +48,7 @@ class LinkedIn(JobBoard):
         #
         if not is_direct_view:
             if self._is_in_recommended_list(job):
-                job_id = int(job.split("=")[-1])
+                job_id = self._extract_current_job_id(job)
                 job = self._url_from_job_id(job_id)
             else:
                 raise InvalidURL()
@@ -61,8 +61,11 @@ class LinkedIn(JobBoard):
 
         return self._extract_from_direct_view(job)
 
-    def _is_in_recommended_list(self, url: str):
+    def _is_in_recommended_list(self, url: str) -> bool:
         return self._RECOMMENDED_LINK_REGEX.search(url)
 
-    def _url_from_job_id(self, job_id: int):
+    def _extract_current_job_id(self, url: str) -> str:
+        return self._RECOMMENDED_LINK_REGEX.findall(url)[0].split("=")[-1]
+
+    def _url_from_job_id(self, job_id: Union[str, int]) -> str:
         return f"{self._VIEW_LINK_PREFIX}/{job_id}/"
