@@ -7,7 +7,8 @@ class OSEnvKeys:
     """
     Containing the names of the OS environment keys
     """
-    DISCORD_TOKEN = 'DISCORD_TOKEN'
+
+    DISCORD_TOKEN = "DISCORD_TOKEN"
     TRIDENT_IMG_URL = "TRIDENT_IMG_URL"
     LINKEDIN_IMG_URL = "LINKEDIN_IMG_URL"
     GLASSDOOR_IMG_URL = "GLASSDOOR_IMG_URL"
