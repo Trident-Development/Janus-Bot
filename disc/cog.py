@@ -4,7 +4,7 @@ from discord_slash import cog_ext
 from discord_slash import SlashContext
 
 from job_boards_scrapers import LinkedIn
-
+from utils import Colors
 
 class Descriptions:
     POST_JOB = "Parse a job post's information beautifully in the channel"
@@ -19,7 +19,27 @@ class Slash(commands.Cog):
     async def _post_job(self, ctx: SlashContext, job):
         linkedin = LinkedIn()
         data = linkedin.get_job_info(job)
-        await ctx.send(f"Title: {data.title}")
+
+        colors = Colors()
+        random_color = colors.random_color()
+        final_color = discord.Colour(random_color)
+
+        description = (
+            f"**{data.company}**\n*{data.title}*\n\n"
+            f"Location: {data.location}.\n\n"
+            f"This job was posted __{data.posted_time_ago}__.\n\n"
+            f"{data.summary}\n\nApply Now: {data.url}\n"
+        )
+
+        embed_content = discord.Embed(
+            title="Check out this job on LinkedIn!",
+            type="rich",
+            description=description,
+            color=final_color
+        )
+        embed_content.set_image(url=f"{data.company_pic_url}")
+        
+        await ctx.send(embed=embed_content)
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):

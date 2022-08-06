@@ -15,4 +15,5 @@ bot.load_extension("disc.cog")
 _LOGGER.info("GeekBot started!")
 
 
+print("Server started!")
 bot.run(DISCORD_TOKEN)
