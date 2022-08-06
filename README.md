@@ -1,4 +1,4 @@
-# LinkedIn Jobs Discord Bot ☁️
+# Janus Bot 🪄
 
 ![1_LTZdOC44Vd8C178qUj5UHg](https://user-images.githubusercontent.com/63386979/183232879-0afaddf3-a8d5-41d1-960e-959e60bc146c.png)
 
