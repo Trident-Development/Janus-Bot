@@ -17,12 +17,22 @@ class Slash(commands.Cog):
     async def _post_job(self, ctx: SlashContext, job):
         linkedin = LinkedIn()
         data = linkedin.get_job_info(job)
-        message = f"Check out this job on LinkedIn!\n\
-            >>> **{data.title}**\n\nLocation: {data.location}.\
-            ```Job Details:\n\nThis job was posted {data.posted_time_ago}.\
-            \n{data.summary}\n\nApply Now: {data.url}``` {data.company_pic_url}"
 
-        await ctx.send(content=message)
+        purple = discord.Colour(0x746AB0)
+        description = f"**{data.company}**\n*{data.title}*\n\n\
+                Location: {data.location}.\n\n\
+                This job was posted __{data.posted_time_ago}__.\n\
+                {data.summary}\n\nApply Now: {data.url}\n"
+
+        embed_content = discord.Embed(
+            title="Check out this job on LinkedIn!",
+            type="rich",
+            description=description,
+            color=purple
+        )
+        embed_content.set_image(url=f"{data.company_pic_url}")
+        
+        await ctx.send(embed=embed_content)
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):
