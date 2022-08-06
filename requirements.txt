@@ -1,6 +1,7 @@
-beautifulsoup4
-flask
-html2text
-pre-commit
-requests
-validators
+beautifulsoup4==4.11.1
+flask==2.2.1
+html2text==2020.1.16
+requests==2.28.1
+validators==0.20.0
+discord==1.7.3
+discord-py-slash-command==3.0.3
