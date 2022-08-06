@@ -21,12 +21,14 @@ class Descriptions:
 class Slash(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.linkedin_job_api = LinkedIn()
 
     @cog_ext.cog_slash(name="post-job", description=Descriptions.POST_JOB)
-    async def _post_job(self, ctx: SlashContext, job):
-        linkedin = LinkedIn()
+    async def _post_job(self, ctx: SlashContext, url_or_jobid: str):
+        job = int(url_or_jobid) if url_or_jobid.isnumeric() else url_or_jobid
+
         try:
-            data = linkedin.get_job_info(job)
+            data = self.linkedin_job_api.get_job_info(job)
         except InvalidURL:
             await ctx.send(
                 (
