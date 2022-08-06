@@ -17,7 +17,12 @@ class Slash(commands.Cog):
     async def _post_job(self, ctx: SlashContext, job):
         linkedin = LinkedIn()
         data = linkedin.get_job_info(job)
-        await ctx.send(content=f"Check out this job on LinkedIn!\n\n>>> **{data.title}**\n\nLocation: {data.location}.\n```Job Details:\n\nThis job was posted {data.posted_time_ago}.\n{data.summary}\n\nApply Now: {data.url}``` {data.company_pic_url}")
+        message = f"Check out this job on LinkedIn!\n\n\
+            >>> **{data.title}**\n\nLocation: {data.location}.\n\
+            ```Job Details:\n\nThis job was posted {data.posted_time_ago}.\n\
+            {data.summary}\n\nApply Now: {data.url}``` {data.company_pic_url}"
+            
+        await ctx.send(content=message)
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):
