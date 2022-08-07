@@ -10,6 +10,7 @@ from discord_slash.utils.manage_components import create_actionrow
 from discord_slash.utils.manage_components import create_button
 
 from job_boards_scrapers import LinkedIn
+from levels_salary_scraper import Levels
 from utils import Colors
 
 
@@ -25,6 +26,14 @@ class Slash(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.linkedin_job_api = LinkedIn()
+        self.levels = Levels()
+
+
+    @cog_ext.cog_slash(name="view-salary", description=Descriptions.POST_JOB)
+    async def _view_salary(self, ctx: SlashContext, company: str):
+
+        data = self.levels.get_salary_info(company)
+        await ctx.send(f"Here is the salary for {company.capitalize()} software engineers (level/tc/base/stock/bonus):\n{data.level} - {data.total} - {data.base} - {data.stock} - {data.bonus}")
 
     @cog_ext.cog_slash(name="post-job", description=Descriptions.POST_JOB)
     async def _post_job(self, ctx: SlashContext, url_or_jobid: str):

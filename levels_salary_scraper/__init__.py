@@ -1,0 +1,1 @@
+from levels_salary_scraper.levels import Levels
