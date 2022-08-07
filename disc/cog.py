@@ -5,6 +5,9 @@ import discord
 from discord.ext import commands
 from discord_slash import cog_ext
 from discord_slash import SlashContext
+from discord_slash.model import ButtonStyle
+from discord_slash.utils.manage_components import create_actionrow
+from discord_slash.utils.manage_components import create_button
 
 from job_boards_scrapers import LinkedIn
 from utils import Colors
@@ -49,7 +52,6 @@ class Slash(commands.Cog):
             f"**{data.company}**\n*{data.title}*\n\n"
             f"Location: {data.location}.\n\n"
             f"This job was posted __{data.posted_time_ago}__.\n\n"
-            f"{data.summary}\n\nApply Now: {data.url}\n"
         )
 
         embed_content = discord.Embed(
@@ -60,7 +62,12 @@ class Slash(commands.Cog):
         )
         embed_content.set_thumbnail(url=f"{data.company_pic_url}")
 
-        await ctx.send(embed=embed_content)
+        apply_button = create_button(
+            style=ButtonStyle.URL, label="Apply Now", url=data.url
+        )
+        action_row = create_actionrow(apply_button)
+
+        await ctx.send(embed=embed_content, components=[action_row])
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):
