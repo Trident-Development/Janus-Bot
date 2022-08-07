@@ -35,26 +35,26 @@ class Slash(commands.Cog):
                 time_string += (
                     f"**🚀 {job['companyName']}** ({time_period['startDate']['month']},"
                     f"{time_period['startDate']['year']} to {time_period['endDate']['month']}, "
-                    f"{time_period['endDate']['year']})\n*{job['title']}*\n"
+                    f"{time_period['endDate']['year']})\n*{job['title']}*\n\n"
                     
                 )
             else:
                 time_string += (
-                    f"**🚀 {job['companyName']}**\n ({time_period['startDate']['month']}, "
-                    f"{time_period['startDate']['year']} to Present)\n\n*{job['title']}*\n"
+                    f"**🚀 {job['companyName']}** ({time_period['startDate']['month']}, "
+                    f"{time_period['startDate']['year']} to Present)\n*{job['title']}*\n\n"
                 )
         
         school_string = ""
         for education in get_profile['education']:
-                school_string += f"**🎖 {education['schoolName']}**\n\n"
+                school_string += f"**🎖 {education['schoolName']}** - {education['fieldOfStudy']}\n\n"
                 
 
         description = (
             f"**{get_profile['headline']}**\n\n"
             f"Based in {get_profile['geoLocationName']}, {get_profile['location']['basicLocation']['countryCode'].upper()}, "
             f"{get_profile['firstName']} is currently working in the **{get_profile['industryName']}** industry.\n\n"
-            f"__Here's {get_profile['firstName']}'s experience so far:__\n\n"
-            f"{time_string}\n__Here's where {get_profile['firstName']} studied:\n\n{school_string}"
+            f"__Here's where {get_profile['firstName']} worked:__\n\n"
+            f"{time_string}__Here's where {get_profile['firstName']} studied:__\n\n{school_string}"
         )
         
         colors = Colors()
