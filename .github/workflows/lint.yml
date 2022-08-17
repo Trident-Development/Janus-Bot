@@ -1,0 +1,16 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run black
+        if: ${{ steps.filter.outputs.py_modified == 'true' }}
+        uses: psf/black@stable
+        with:
+          options: "--check"
+          src: "."
+          version: "22.3.0"
+      - name:

@@ -1,9 +1,6 @@
 from typing import Union
 
-from job_boards_scrapers.base import JobBoard
-from job_boards_scrapers.base import JobBoardType
-from job_boards_scrapers.base import JobInfo
-
+from job_boards_scrapers.base import JobBoard, JobBoardType, JobInfo
 
 # TODO: Implement a Glassdoor job scraper
 

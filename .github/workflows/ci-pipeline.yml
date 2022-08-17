@@ -30,10 +30,3 @@ jobs:
         run: |
           pip install -r requirements-dev.txt
           pip install -r requirements.txt
-      - name: Run black
-        if: ${{ steps.filter.outputs.py_modified == 'true' }}
-        uses: psf/black@stable
-        with:
-          options: "--check"
-          src: "."
-          version: "22.3.0"

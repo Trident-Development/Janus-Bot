@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import Optional
-from typing import Union
+from typing import Optional, Union
 
 import html2text
 import requests

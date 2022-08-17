@@ -1,5 +1,4 @@
-from validators import url
-from validators import ValidationFailure
+from validators import ValidationFailure, url
 
 
 def is_valid_url(url_str: str) -> bool:
