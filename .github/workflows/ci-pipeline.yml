@@ -32,15 +32,8 @@ jobs:
           pip install -r requirements.txt
       - name: Run black
         if: ${{ steps.filter.outputs.py_modified == 'true' }}
-        uses: psf/black
+        uses: psf/black@stable
         with:
           options: "--check"
           src: "."
           version: "22.3.0"
-      - name: Run isort
-        if: ${{ steps.filter.outputs.py_modified == 'true' }}
-        uses: pycqa/isort
-        with:
-          options: --check-only --profile black
-          src: "."
-          version: "5.10.1"
