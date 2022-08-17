@@ -3,15 +3,12 @@ from http.client import InvalidURL
 
 import discord
 from discord.ext import commands
-from discord_slash import cog_ext
-from discord_slash import SlashContext
+from discord_slash import SlashContext, cog_ext
 from discord_slash.model import ButtonStyle
-from discord_slash.utils.manage_components import create_actionrow
-from discord_slash.utils.manage_components import create_button
+from discord_slash.utils.manage_components import create_actionrow, create_button
 
 from job_boards_scrapers import LinkedIn
 from utils import Colors
-
 
 _LOGGER = logging.getLogger(__name__)
 

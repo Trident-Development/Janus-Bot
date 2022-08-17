@@ -1,11 +1,8 @@
 import re
 from http.client import InvalidURL
-from typing import Optional
-from typing import Union
+from typing import Optional, Union
 
-from job_boards_scrapers.base import JobBoard
-from job_boards_scrapers.base import JobBoardType
-from job_boards_scrapers.base import JobInfo
+from job_boards_scrapers.base import JobBoard, JobBoardType, JobInfo
 from utils.validator import is_valid_url
 
 
