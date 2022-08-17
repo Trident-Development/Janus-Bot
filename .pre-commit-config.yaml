@@ -35,6 +35,11 @@ repos:
     hooks:
       - id: autoflake8
         args: ['--in-place', '--remove-unused-variables']
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.7.9
+    hooks:
+      - id: flake8
+        args: ['--exclude', '.venv']
   - repo: https://github.com/asottile/pyupgrade
     rev: v2.19.0
     hooks:

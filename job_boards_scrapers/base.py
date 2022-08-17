@@ -27,9 +27,6 @@ class JobBoardType:
 class NeedSubclassImplementationError(Exception):
     """Method needs implementation from subclass"""
 
-    def __init__(self, msg="Need implementation from subclass") -> None:
-        super().__init__(msg)
-
 
 class JobBoard:
     """
