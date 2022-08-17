@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import timedelta
-from typing import Optional
-from typing import Union
+from typing import Optional, Union
 
 import html2text
 import requests
@@ -27,9 +26,6 @@ class JobBoardType:
 
 class NeedSubclassImplementationError(Exception):
     """Method needs implementation from subclass"""
-
-    def __init__(self, msg="Need implementation from subclass") -> None:
-        super().__init__(msg)
 
 
 class JobBoard:

@@ -1,2 +1,0 @@
-from job_boards_scrapers.glassdoor import Glassdoor
-from job_boards_scrapers.linkedin import LinkedIn
