@@ -5,3 +5,4 @@ validators==0.20.0
 discord==1.7.3
 discord-py-slash-command==3.0.3
 lxml==4.9.1
+python-dateutil==2.8.2
