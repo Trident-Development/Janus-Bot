@@ -30,7 +30,7 @@ class Slash(commands.Cog):
             data = get_linkedin_job_info(job)
         except InvalidURL:
             await ctx.send(
-                "Hi there! Seems like your URL is invalid. "
+                "Hi there! Seems like your URL or job ID is invalid. "
                 "Make sure that the URL is linking to a job post. "
                 "And keep in mind that currently Janus only supports LinkedIn job posts.",
                 hidden=True,
