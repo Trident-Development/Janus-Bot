@@ -7,7 +7,7 @@ from discord_slash import SlashContext, cog_ext
 from discord_slash.model import ButtonStyle
 from discord_slash.utils.manage_components import create_actionrow, create_button
 
-from job_boards_scrapers import LinkedIn
+from job_api_wrapers import get_linkedin_job_info
 from utils import Colors
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,34 +21,38 @@ class Descriptions:
 class Slash(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.linkedin_job_api = LinkedIn()
 
     @cog_ext.cog_slash(name="post-job", description=Descriptions.POST_JOB)
     async def _post_job(self, ctx: SlashContext, url_or_jobid: str):
         job = int(url_or_jobid) if url_or_jobid.isnumeric() else url_or_jobid
 
         try:
-            data = self.linkedin_job_api.get_job_info(job)
+            data = get_linkedin_job_info(job)
         except InvalidURL:
             await ctx.send(
-                (
-                    "Hi there! Seems like your URL is invalid. "
-                    "Make sure that the URL is linking to a job post. "
-                    "And keep in mind that currently Janus only supports LinkedIn job posts."
-                ),
+                "Hi there! Seems like your URL is invalid. "
+                "Make sure that the URL is linking to a job post. "
+                "And keep in mind that currently Janus only supports LinkedIn job posts.",
                 hidden=True,
             )
             _LOGGER.info("Sent private message to user notifying given url is invalid.")
             return
+
+        if data is None:
+            await ctx.send(
+                "Seems like we have an internal server error."
+                "Please try again later :(",
+                hidden=True,
+            )
 
         colors = Colors()
         random_color = colors.random_color()
         final_color = discord.Colour(random_color)
 
         description = (
-            f"**{data.company}**\n*{data.title}*\n\n"
-            f"Location: {data.location}.\n\n"
-            f"This job was posted __{data.posted_time_ago}__.\n\n"
+            f"**{data['company']}**\n*{data['title']}*\n\n"
+            f"Location: {data['location']}.\n\n"
+            f"This job was posted __{data['posted_time_ago']}__.\n\n"
         )
 
         embed_content = discord.Embed(
@@ -57,10 +61,10 @@ class Slash(commands.Cog):
             description=description,
             color=final_color,
         )
-        embed_content.set_thumbnail(url=f"{data.company_pic_url}")
+        embed_content.set_thumbnail(url=f"{data['company_pic_url']}")
 
         apply_button = create_button(
-            style=ButtonStyle.URL, label="Apply Now", url=data.url
+            style=ButtonStyle.URL, label="Apply Now", url=data["url"]
         )
         action_row = create_actionrow(apply_button)
 
