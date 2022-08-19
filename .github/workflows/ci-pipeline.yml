@@ -1,8 +1,6 @@
 name: CI Pipeline
 
-on:
-  pull_request:
-    type: [ opened, synchronize ]
+on: [push]
 
 jobs:
   ci-pipeline:
