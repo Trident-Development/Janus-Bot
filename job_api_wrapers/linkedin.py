@@ -3,6 +3,8 @@ from typing import Optional, Union
 
 import requests
 
+from .datatypes import JobInfo
+
 
 def get_job_info(url_or_id: Union[str, int]) -> Optional[dict]:
     response = requests.get(
@@ -17,4 +19,4 @@ def get_job_info(url_or_id: Union[str, int]) -> Optional[dict]:
     if response.status_code == 500 or not payload["success"]:
         return None
 
-    return payload["data"][0]
+    return JobInfo.from_payload(payload["data"][0])
