@@ -57,9 +57,9 @@ def main():
         + "\nYour development environemnt is successfully created!\n"
         + "Please run \033[93m"
         + (
-            "source .venv/bin/activate"
+            f"source {_VENV_DIR}/bin/activate"
             if not is_win()
-            else ".\\venv\\Scripts\\activate"
+            else f".\\{_VENV_DIR}\\Scripts\\activate"
         )
         + "\033[92m to enter your virtual environemnt and start developing!\n\033[0m"
     )
