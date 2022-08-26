@@ -14,7 +14,7 @@ def is_win():
 
 def check_py_version(major: int, minor: int) -> None:
     pyver = sys.version_info
-    if pyver.major != 3 or pyver.minor != 10:
+    if pyver.major != major or pyver.minor != minor:
         print(
             f"Your Python version is {pyver.major}.{pyver.minor}. "
             f"Python {major}.{minor} is required!\n"
