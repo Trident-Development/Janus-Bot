@@ -37,17 +37,21 @@ class Slash(commands.Cog):
         await ctx.send(**job_info_message(data))
 
     @cog_ext.cog_slash(
-        name="view-profile", description=Descriptions.VIEW_LINKEDIN_PROFILE
+        name="view-linkedin-profile", description=Descriptions.VIEW_LINKEDIN_PROFILE
     )
-    async def _view_profile(self, ctx: SlashContext, profile: str):
+    async def _view_linkedin_profile(self, ctx: SlashContext, url_or_public_id: str):
         await ctx.send("Hang on, grabbing details for you...", hidden=True)
 
-        profile = get_profile(profile)
+        profile = get_profile(url_or_public_id.strip())
         if not profile:
             await ctx.send(**something_wrong_message())
             return
 
-        await ctx.send(**linkedin_profile_info_message(profile))
+        try:
+            await ctx.send(**linkedin_profile_info_message(profile))
+        except:  # noqa
+            _LOGGER.exception("Error occured while showing linkedin profile")
+            await ctx.send(**something_wrong_message())
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):
