@@ -1,9 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any
-from typing import Dict
-from typing import List
+from typing import Any, Dict, List
 
 
 @dataclass
@@ -34,11 +32,11 @@ class LinkedinProfile:
     profile_image_url: str
     headline: str = None
     about: str = None
-    experience: List[Experience] = None
-    education: List[Education] = None
+    experience: list[Experience] = None
+    education: list[Education] = None
 
     @classmethod
-    def from_payload(cls, payload: Dict[str, Any]) -> LinkedinProfile:
+    def from_payload(cls, payload: dict[str, Any]) -> LinkedinProfile:
         experience_list = [Experience(**exdata) for exdata in payload.pop("experience")]
         education_list = [Education(**eddata) for eddata in payload.pop("education")]
         return cls(experience=experience_list, education=education_list, **payload)

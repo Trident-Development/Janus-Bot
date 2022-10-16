@@ -36,7 +36,9 @@ class Slash(commands.Cog):
 
         await ctx.send(**job_info_message(data))
 
-    @cog_ext.cog_slash(name="view-profile", description=Descriptions.VIEW_LINKEDIN_PROFILE)
+    @cog_ext.cog_slash(
+        name="view-profile", description=Descriptions.VIEW_LINKEDIN_PROFILE
+    )
     async def _view_profile(self, ctx: SlashContext, profile: str):
         await ctx.send("Hang on, grabbing details for you...", hidden=True)
 

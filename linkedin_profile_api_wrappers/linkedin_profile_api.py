@@ -1,7 +1,8 @@
 from typing import Optional
-from linkedin_profile_api_wrappers.datatypes import LinkedinProfile
 
 import requests
+
+from linkedin_profile_api_wrappers.datatypes import LinkedinProfile
 
 
 def get_profile(url_or_public_id: str) -> Optional[LinkedinProfile]:
