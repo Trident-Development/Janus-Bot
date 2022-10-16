@@ -18,7 +18,10 @@ class OSEnvKeys:
     @classmethod
     def to_list(cls):
         """Return a list of the OS environment keys"""
-        condition = lambda x: not callable(getattr(cls, x)) and not x.startswith("__")
+
+        def condition(attr) -> bool:
+            return not callable(getattr(cls, attr)) and not attr.startswith("__")
+
         return [getattr(cls, attr) for attr in dir(cls) if condition(attr)]
 
 
