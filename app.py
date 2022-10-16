@@ -13,7 +13,6 @@ slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 bot.load_extension("disc.cog")
 
 _LOGGER.info("Janus started!")
-
-
 print("Server started!")
+
 bot.run(DISCORD_TOKEN)
