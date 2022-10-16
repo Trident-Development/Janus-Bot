@@ -15,11 +15,11 @@ def is_win():
 
 def check_py_version(major: int, minor: int) -> None:
     pyver = sys.version_info
-    if pyver.major != major or pyver.minor != minor:
+    if pyver.major != major or pyver.minor < minor:
         print(
             "\033[91m"
             f"Your Python version is {pyver.major}.{pyver.minor}. "
-            f"Python {major}.{minor} is required!\n"
+            f"Python version >= {major}.{minor} is required!\n"
             "Aborting setup process!"
             "\033[0m"
         )
