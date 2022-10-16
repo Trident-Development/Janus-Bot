@@ -5,6 +5,7 @@ import discord
 
 class Descriptions:
     POST_JOB = "Parse a job post's information beautifully in the channel"
+    VIEW_LINKEDIN_PROFILE = "View a LinkedIn user's profile"
     HELP = "Display the list of commands and their usages"
 
 

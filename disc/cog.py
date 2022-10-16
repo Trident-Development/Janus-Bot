@@ -6,7 +6,12 @@ from discord_slash import SlashContext, cog_ext
 
 from disc.message_generators import Descriptions, help_message, server_error_message
 from disc.message_generators.job_posting import invalid_url_message, job_info_message
+from disc.message_generators.linkedin_profile import (
+    linkedin_profile_info_message,
+    something_wrong_message,
+)
 from job_api_wrapers import get_linkedin_job_info
+from linkedin_profile_api_wrappers import get_profile
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -30,6 +35,19 @@ class Slash(commands.Cog):
             await ctx.send(**server_error_message())
 
         await ctx.send(**job_info_message(data))
+
+    @cog_ext.cog_slash(
+        name="view-profile", description=Descriptions.VIEW_LINKEDIN_PROFILE
+    )
+    async def _view_profile(self, ctx: SlashContext, profile: str):
+        await ctx.send("Hang on, grabbing details for you...", hidden=True)
+
+        profile = get_profile(profile)
+        if not profile:
+            await ctx.send(**something_wrong_message())
+            return
+
+        await ctx.send(**linkedin_profile_info_message(profile))
 
     @cog_ext.cog_slash(name="help", description=Descriptions.HELP)
     async def _help(self, ctx: SlashContext):
