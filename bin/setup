@@ -43,6 +43,14 @@ def perform_installations() -> None:
 
     subprocess.run([venv_pip, "install", "-r", "requirements-dev.txt"])
     subprocess.run([venv_pip, "install", "-r", "requirements.txt"])
+    
+    print("\033[96m\nInstalling precommit hook...\033[0m\n")
+    venv_precommit = (
+        f"{_VENV_DIR}/Scripts/pre-commit"
+        if is_win()
+        else f"{_VENV_DIR}/bin/pre-commit"
+    )
+    subprocess.run([venv_precommit, "install"])
 
 
 def main():
